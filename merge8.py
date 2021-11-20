@@ -4,20 +4,20 @@ import json
 import pickle
 import difflib
 
-with open('../data/submit/nezha_cls_reg_ep10_sortdata.json', 'r') as f:
+with open('/data/fanghaipeng/mydata/nezha_cls_reg_ep10_sortdata.json', 'r') as f:
     data0 = json.load(f)
-with open('../data/submit/nezha_cls_reg_ep10_sortdata_filter_th01.json', 'r') as f:
+with open('/data/fanghaipeng/mydata/nezha_cls_reg_ep10_sortdata_filter_th01.json', 'r') as f:
     data1 = json.load(f)
-with open('../data/submit/submit_sort_nezha_wo.json', 'r') as f:
+with open('/data/fanghaipeng/mydata/submit_sort_nezha_wo.json', 'r') as f:
     data2 = json.load(f)
-with open('../data/submit/submit_clsreg_0point1_nezha_wo.json', 'r') as f:
+with open('/data/fanghaipeng/mydata/submit_clsreg_0point1_nezha_wo.json', 'r') as f:
     data3 = json.load(f)
-with open('../data/submit/submit_clsreg_0point2_nezha_wo.json', 'r') as f:
+with open('/data/fanghaipeng/mydata/submit_clsreg_0point2_nezha_wo.json', 'r') as f:
     data4 = json.load(f)
-with open('./scores_regen_sort.pkl', 'rb') as f:
+with open('/data/fanghaipeng/mydata/scores_regen_sort.pkl', 'rb') as f:
     scores = pickle.load(f)
 
-data_dir = "../data/TestA_Preporcess_public.json"
+data_dir = "/data/fanghaipeng/POIdata/TestA_Preporcess_public.json"
 def read_corpus(dir_path):
     """
     读原始数据
@@ -41,8 +41,11 @@ keys = list(data1.keys())
 
 final = {}
 cnt = {x: 0 for x in range(15)}
-
+count = 0
 for key in keys:
+    count += 1
+    if(count > 50) :
+        break
     score = scores[key]
     cls_res = data0[key]
     cls_res_th01 = data1[key]
@@ -167,5 +170,5 @@ for key in keys:
     continue
 
 print(cnt)
-with open('../data/submit/merge8.json', 'w') as f:
+with open('/data/fanghaipeng/mydata/merge8.json', 'w') as f:
     json.dump(final, f)
